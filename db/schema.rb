@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_09_031153) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_28_220009) do
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.string "role"
@@ -28,5 +28,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_031153) do
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
+
+  create_table "saves", force: :cascade do |t|
+    t.string "savename"
+    t.integer "slot"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "player_id", null: false
+    t.index ["player_id"], name: "index_saves_on_player_id"
+  end
+
+  add_foreign_key "saves", "players"
 end
